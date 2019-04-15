@@ -14,11 +14,12 @@ import { push } from 'react-router-redux';
 
 import request from 'utils/request';
 
-import { DISPATCH_ACTIONS } from './constants';
+import { DISPATCH_ACTIONS } from './constants'; 
 
 export function* getLuckyNumber({ username }) {
   // TODO: What port is the service layer running on again?
-  const requestUrl = 'http://localhost:???/lucky-number';
+  
+  const requestUrl = `http://localhost:???/lucky-number?username=${username}`;
 
   try {
     const result = yield call(request, requestUrl);

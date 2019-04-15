@@ -13,13 +13,16 @@ import { DISPATCH_ACTIONS } from './constants';
 const initialState = fromJS({
   luckyNumber: -1
 });
-
+ 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case ???:
-      // TODO: Set things in the Redux store
+    case 'SET_LUCKY_NUMBER':
+      return {
+        ...state,
+        luckyNumber: action.payload.luckyNumber
+      }
     default:
-      return state;
+      return state; 
   }
 }
 

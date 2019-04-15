@@ -17,7 +17,7 @@ import injectReducer from 'utils/injectReducer';
 
 import WelcomeForm from 'components/WelcomeForm/WelcomeForm';
 
-import { CONTAINER_KEY } from '../constants';
+import { CONTAINER_KEY, DISPATCH_ACTIONS } from '../constants';
 import saga from '../saga';
 import reducer from '../reducer';
 
@@ -27,7 +27,7 @@ class Welcome extends React.PureComponent {
 
     this.submit = this.submit.bind(this);
   }
-
+ 
   /**
    * This function is invoked when the Redux Form is submitted.
    *
@@ -38,8 +38,17 @@ class Welcome extends React.PureComponent {
     const { dispatch } = this.props;
 
     // TODO: Get the form values and invoke the service layer
+ 
+    const data = {
+      username: values.get('userName')
+    }
+    
+    dispatch({
+      type: DISPATCH_ACTIONS.GET_LUCKY_NUMBER,
+      payload: data
+    })
 
-    dispatch(???);
+    console.log(data)
   }
 
   render() {
@@ -50,7 +59,7 @@ class Welcome extends React.PureComponent {
         </Helmet>
 
         <div className="mt5 pa4 center w-25 bg-light-gray">
-          <WelcomeForm onSubmit={???} />
+          <WelcomeForm onSubmit={this.submit} />
         </div>
       </article>
     );

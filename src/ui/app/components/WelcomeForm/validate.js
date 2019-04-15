@@ -12,7 +12,21 @@
  * @returns An errors object with any validation errors
  */
 export const validate = (values) => {
-  const errors = {};
+  const errors = {};  
+  // Name of the error has to correspond with field name
+  // Access immutable map values by using get(:key)
+  
+  if (!values.get('firstName')) {
+    errors.firstName = 'Required Field'
+  }
+  
+  if (!values.get('lastName')) {
+    errors.lastName = 'Required Field'
+  }
+  
+  if (!values.get('userName')) {
+    errors.userName = 'Required Field'
+  }
 
   // TODO: Validate that the user has entered a username, first name, and last name
 
