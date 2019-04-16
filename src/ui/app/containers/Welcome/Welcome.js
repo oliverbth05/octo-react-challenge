@@ -2,14 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet'; 
-
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
+import { Helmet } from 'react-helmet';
 
 import WelcomeForm from 'components/WelcomeForm/WelcomeForm';
-
-import { CONTAINER_KEY, DISPATCH_ACTIONS } from '../constants';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+import { CONTAINER_KEY } from '../constants';
+import { getLuckyNumber } from '../actions';
 import saga from '../saga';
 import reducer from '../reducer';
 
@@ -22,17 +21,12 @@ class Welcome extends React.PureComponent {
 
   submit(values) {
     const { dispatch } = this.props;
-
     const payload = {
       firstName: values.get('firstName'),
       lastName: values.get('lastName'),
       userName: values.get('userName')
-    }
-
-    dispatch({
-      type: DISPATCH_ACTIONS.GET_LUCKY_NUMBER,
-      payload
-    })
+    };
+    dispatch(getLuckyNumber(payload));
   }
 
   render() {
@@ -58,4 +52,8 @@ const withConnect = connect();
 const withSaga = injectSaga({ key: CONTAINER_KEY, saga });
 const withReducer = injectReducer({ key: CONTAINER_KEY, reducer });
 
-export default compose(withReducer, withSaga, withConnect)(Welcome);
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect
+)(Welcome);

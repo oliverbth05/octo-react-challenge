@@ -3,19 +3,27 @@ import { push } from 'react-router-redux';
 
 import request from 'utils/request';
 
-import { DISPATCH_ACTIONS } from './constants';  
+import { DISPATCH_ACTIONS } from './constants';
+import { setLuckyNumber } from './actions';
 
-export function* getLuckyNumber({payload}) { //Using payload convention for redux actions
-  
+export function* getLuckyNumber({ payload }) {
+  // Using payload convention for redux actions
+
   const requestUrl = `http://localhost:1337/lucky-number?username=${payload.userName}`; // PORT:1337 by default for sails
 
   try {
     const result = yield call(request, requestUrl);
-    yield put({type: DISPATCH_ACTIONS.SET_LUCKY_NUMBER, payload: { firstName: payload.firstName, lastName: payload.lastName, luckyNumber: result.luckyNumber}})
-    yield put(push('/lucky'))
+    yield put(
+      setLuckyNumber({
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        luckyNumber: result.luckyNumber
+      })
+    ); // Uses the original parameters to the generator, along with return value of request
+    yield put(push('/lucky'));
   } catch (err) {
     console.log(err);
-    alert('An error occurred while using service, please try again.')
+    alert('An error occurred while using service, please try again.');
   }
 }
 

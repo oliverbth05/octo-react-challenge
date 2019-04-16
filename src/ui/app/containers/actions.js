@@ -1,16 +1,17 @@
-/**
- * actions.js
- *
- * This file contains the various actions used by Redux.
- */
-
 import { DISPATCH_ACTIONS } from './constants';
 
-export function getLuckyNumber(username) {
+export function getLuckyNumber(data) {
+  // Data contains first, last and username
   return {
     type: DISPATCH_ACTIONS.GET_LUCKY_NUMBER,
-    username
+    payload: data
   };
 }
 
-// TODO: Add more actions if needed
+export function setLuckyNumber(data) {
+  // Data contains first, last and lucky number
+  return {
+    type: DISPATCH_ACTIONS.SET_LUCKY_NUMBER,
+    payload: data
+  };
+}
