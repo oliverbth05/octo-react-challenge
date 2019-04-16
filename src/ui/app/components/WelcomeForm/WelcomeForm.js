@@ -1,12 +1,3 @@
-/**
- * WelcomeForm.js
- *
- * This component contains the Redux Form used to collect user input.
- * Its props are passed down from the Welcome container.
- *
- * @see https://redux-form.com/7.4.2/docs/api/field.md/
- */
- 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form/immutable';
@@ -25,7 +16,7 @@ class WelcomeForm extends React.PureComponent {
     return (
       <form className="flex flex-column" onSubmit = {handleSubmit}>
         {/* TODO: Add elements to form to collect user input */}
-        <Field
+        <Field 
           name="firstName"
           component={RFTextField}
           label="First Name" 

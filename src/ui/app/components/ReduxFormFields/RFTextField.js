@@ -12,16 +12,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 
-export const RFTextField = ({ input, label, meta: { touched, error }, ...custom }) =>{ 
-  // console.log(input, label, touched, error)
-  return <TextField
-      label={label}
-      error={touched && error}
-      {...input}
-      {...custom}
-    />
-}
-
+export const RFTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+  <TextField
+    label={label}
+    error={touched && error}
+    {...input}
+    {...custom}
+  />
+);
 
 RFTextField.propTypes = {
   input: PropTypes.any.isRequired,

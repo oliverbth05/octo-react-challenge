@@ -1,32 +1,21 @@
-/**
- * saga.js
- *
- * This file contains the Saga function used to get data from the
- * service layer. The Saga function injects data into the Redux
- * store via the put function, which takes an action as a parameter.
- *
- * @see https://redux-saga.js.org/
- * @see https://decembersoft.com/posts/changing-react-route-programmatically-with-redux-saga/
- */
-
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 
 import request from 'utils/request';
 
-import { DISPATCH_ACTIONS } from './constants'; 
+import { DISPATCH_ACTIONS } from './constants';  
 
-export function* getLuckyNumber({ username }) {
-  // TODO: What port is the service layer running on again?
+export function* getLuckyNumber({payload}) { //Using payload convention for redux actions
   
-  const requestUrl = `http://localhost:???/lucky-number?username=${username}`;
+  const requestUrl = `http://localhost:1337/lucky-number?username=${payload.userName}`; // PORT:1337 by default for sails
 
   try {
     const result = yield call(request, requestUrl);
-
-    // TODO: Do stuff with the result
+    yield put({type: DISPATCH_ACTIONS.SET_LUCKY_NUMBER, payload: { firstName: payload.firstName, lastName: payload.lastName, luckyNumber: result.luckyNumber}})
+    yield put(push('/lucky'))
   } catch (err) {
-    // TODO: Bonus points for some error handling
+    console.log(err);
+    alert('An error occurred while using service, please try again.')
   }
 }
 
